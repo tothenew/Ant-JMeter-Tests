@@ -1,10 +1,13 @@
+#!/usr/bin/env groovy
 File driverFile = new File("driver.sh");
 driverFile.text="";
 String driverFileText = ""
-String THREADS = 20
-String DURATION = 180
+String THREADS = 5 
+String DURATION = 10 //In seconds
+String TEST_NAME = "Project"
+String TEST_TITLE = "Project title"
 String buildTemplate = new File("build.xml.template").text
-String jmxTemplate = new File("espn.jmx.template").text
+String jmxTemplate = new File("project.jmx.template").text
 File conf = new File("conf.txt");
 conf.eachLine { line ->
 	if(!line.startsWith('#')){
@@ -17,7 +20,7 @@ conf.eachLine { line ->
 		f.text = buildTemplate.replaceAll("##DESC##", DESC);
 		
 		f = new File("${DESC}.jmx");
-		f.text = jmxTemplate.replaceAll("##DESC##", DESC).replaceAll("##THREADS##", THREADS).replaceAll("##PORT##", PORT).replaceAll("##DURATION##", DURATION).replaceAll("##PATH##", PATH).replaceAll("##HOST##", HOST);
+		f.text = jmxTemplate.replaceAll("##DESC##", DESC).replaceAll("##THREADS##", THREADS).replaceAll("##PORT##", PORT).replaceAll("##DURATION##", DURATION).replaceAll("##PATH##", PATH).replaceAll("##HOST##", HOST).replaceAll("##TEST_NAME##", TEST_NAME).replaceAll("##TEST_TITLE##", TEST_TITLE);
 		driverFileText  = driverFileText +  "ant -f build_${DESC}.xml;"
 		println driverFileText
 	}
