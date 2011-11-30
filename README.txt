@@ -5,3 +5,4 @@
  Update generate.groovy with THREAD config
  Run "groovy generate.groovy"
  ./driver.sh (You might have to chmod +x driver.sh to make it executable, duh!)
+Find the test results in the "target" folder with the TEST_NAMEs that you specified
