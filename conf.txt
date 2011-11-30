@@ -1,0 +1,3 @@
+#url,port,url/queryString_for_get,Report_Name
+collector.qa2.intelligrape.net,80,landing-page/casas-patronales/lp1-casas-popup, LOCATION_AWARE
+collector.qa2.intelligrape.net,80,landing-page/somezin/lp6-chard-form-popup, NON_LOCATION_AWARE

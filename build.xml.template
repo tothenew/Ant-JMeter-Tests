@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="build-tests" default="run-load-tests" basedir=".">
+
+<property name="jmeter.home" value="${basedir}/jakarta-jmeter-2.3.1" />			
+
+    <path id="jmeter.path">
+      <fileset dir="." includes="ant-jmeter.jar"/>
+    </path> 
+
+	<target name="run-load-tests">
+	  <delete dir="${target.dir}" quiet="true" failonerror="false"/>    
+	  <taskdef name="jmeter" classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask" classpathref="jmeter.path" />
+	  <echo message="Running load tests in testing.xml" />
+	  <jmeter
+       jmeterhome="/opt/jmeter"
+		resultlog="${basedir}/target/##DESC##.xml">
+		<jvmarg value="-Xincgc"/>
+		<jvmarg value="-Xmx512m"/>
+		<jvmarg value="-Dproperty=value"/>
+	    <property name="request.threads" value="5"/>
+	    <property name="request.loop" value="50"/>
+		<property name="jmeter.save.saveservice.assertion_results" value="all"/>
+		<property name="jmeter.save.saveservice.output_format" value="xml"/>
+		<testplans dir="${basedir}" includes="##DESC##.jmx"/>
+	  </jmeter>
+	  <xslt in="${basedir}/target/##DESC##.xml"
+	    out="${basedir}/target/##DESC##.html"
+		style="${basedir}/jmeter-results-detail-report_21.xsl"/>
+	</target>
+
+</project>

@@ -1,0 +1,1 @@
+ant -f build_LOCATION_AWARE.xml;ant -f build_NON_LOCATION_AWARE.xml;
